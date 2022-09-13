@@ -29,13 +29,11 @@ CREATE TABLE categories (
   "category_name" VARCHAR(50)
 ); 
  
- INSERT INTO categories
+INSERT INTO categories
   ("category_id", "category_name")
 VALUES
   ('1', 'Push'),
   ('2', 'Pull'),
   ('3', 'Legs'),
   ('4', 'Hinge');
-   
-
-
+  
