@@ -1,7 +1,7 @@
 CREATE SCHEMA weightlifting;
 SET search_path = weightlifting;
 
- CREATE TABLE workout (
+CREATE TABLE workout (
    "workout_date" DATE,
    "exercise_id" INTEGER,
    "category_id" INTEGER,
@@ -18,11 +18,11 @@ CREATE TABLE exercises (
 INSERT INTO categories
   ("exercise_id, "exercise_name", "category_id")
 VALUES
-  (1, 'Deadlift', 4),
-  (2, 'Bench Press', 1),
-  (3, 'Squat', 3),
-  (4, 'Overhead Press', 1),
-  (5, 'Row', 2);
+  ('1', 'Deadlift', '4'),
+  ('2', 'Bench Press', '1'),
+  ('3', 'Squat', '3'),
+  ('4', 'Overhead Press', '1'),
+  ('5', 'Row', '2');
 
 CREATE TABLE categories (
   "category_id" INTEGER,
@@ -32,7 +32,7 @@ CREATE TABLE categories (
 INSERT INTO categories
   ("category_id", "category_name")
 VALUES
-  (1, 'Push'),
-  (2, 'Pull'),
-  (3, 'Legs'),
-  (4, 'Hinge');
+  ('1', 'Push'),
+  ('2', 'Pull'),
+  ('3', 'Legs'),
+  ('4', 'Hinge');
