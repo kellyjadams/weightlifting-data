@@ -16,7 +16,7 @@ CREATE TABLE exercises (
 ); 
 
 INSERT INTO exercises 
-   ("exercise_id, "exercise_name", "category_id")
+   ("exercise_id", "exercise_name", "category_id")
 VALUES
    ('1', 'Deadlift', '4'),
    ('2', 'Bench Press', '1'),
