@@ -15,8 +15,8 @@ CREATE TABLE exercises (
   "category_id" INTEGER
 ); 
 
-INSERT INTO categories
-  ("exercise_id, "exercise_name", "category_id")
+INSERT INTO exercises 
+("exercise_id, "exercise_name", "category_id")
 VALUES
   ('1', 'Deadlift', '4'),
   ('2', 'Bench Press', '1'),
@@ -28,11 +28,14 @@ CREATE TABLE categories (
   "category_id" INTEGER,
   "category_name" VARCHAR(50)
 ); 
-
-INSERT INTO categories
+ 
+ INSERT INTO categories
   ("category_id", "category_name")
 VALUES
   ('1', 'Push'),
   ('2', 'Pull'),
   ('3', 'Legs'),
   ('4', 'Hinge');
+   
+
+
