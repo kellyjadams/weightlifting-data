@@ -6,7 +6,7 @@ CREATE TABLE workout (
    "exercise_id" INTEGER,
    "category_id" INTEGER,
    "weight_lbs" INTEGER,
-   "reps" INTENGER
+   "reps" INTEGER
  );
  
 CREATE TABLE exercises (
