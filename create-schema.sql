@@ -9,7 +9,7 @@ CREATE TABLE workout (
    "reps" INTEGER
  );
  
- INSERT INTO workout
+INSERT INTO workout
     ("workout_date", "exercise_id", "category_id", "weight_lbs", "reps")
 VALUES
    ( '2022-06-05', '4' , '1' , '45' , '5' ),
