@@ -1,5 +1,7 @@
 # Weightlifting Data
-An ongoing project tracking and analyzing my weightlifting data in 5 main barbell lifts: 
+An ongoing project tracking and analyzing my weightlifting data using SQL. 
+
+I'll be tracking/analyzing 5 main barbell lifts: 
 1. deadlift, 
 2. squat, 
 3. overhead press,
