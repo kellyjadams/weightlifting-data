@@ -12,7 +12,7 @@ I'll be tracking/analyzing 5 main barbell lifts:
 The first set of data will be from the months June 2022 - August 2022. 
 
 ### Links
-* Full article on my blog here (work in progress) 
+* Full article on my blog [here](https://www.kellyjadams.com/post/weightlifting-project). 
 * Explore my database on db-fiddle [here](https://www.db-fiddle.com/f/vSuQMqMWAtkJELP2gmPZNM/1).
 
 ## Files
