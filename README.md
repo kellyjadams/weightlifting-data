@@ -16,8 +16,9 @@ The first set of data will be from the months June 2022 - August 2022.
 * Explore my database on db-fiddle [here](https://www.db-fiddle.com/f/vSuQMqMWAtkJELP2gmPZNM/1).
 
 ## Files
-* **schema-sql.sql** is SQL code to create my own schema for my project
+* **schema.sql** is SQL code to create my own schema for my project
 * **FitNotes_Export_2022_08_31 (6) June-August 5 Lifts Data.csv** is the raw data. It includes the date, exercise_id, category_id, weights (lbs), and reps.
+* **query.sql** is SQL code to analyze my weightlifting data
 
 ## Curently Working On
 Updated 9/15/22: Creating a schema using PostgreSQL
