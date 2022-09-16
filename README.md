@@ -11,8 +11,9 @@ I'll be tracking/analyzing 5 main barbell lifts:
 
 The first set of data will be from the months June 2022 - August 2022. 
 
-### Article
-Link to the full article on my blog here (work in progress) 
+### Links
+* Full article on my blog here (work in progress) 
+* Explore my database on db-fiddle [here](https://www.db-fiddle.com/f/vSuQMqMWAtkJELP2gmPZNM/1).
 
 ## Curently Working On
 Updated 9/15/22: Creating a schema using PostgreSQL
