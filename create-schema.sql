@@ -5,7 +5,7 @@ CREATE TABLE workout (
    "workout_date" DATE,
    "exercise_id" INTEGER,
    "category_id" INTEGER,
-   "weight_lbs" INTEGER,
+   "weight_lbs" FLOAT,
    "reps" INTEGER
  );
  
