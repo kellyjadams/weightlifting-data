@@ -11,7 +11,7 @@ CREATE TABLE workout (
  );
  
 INSERT INTO workout
-    ("workout_date", "exercise_id", "category_id", "weight_lbs", "reps")
+    ("workout_id", "workout_date", "exercise_id", "category_id", "weight_lbs", "reps")
 VALUES
    -- 2022-06-05
    ( '1', '2022-06-05', '4' , '1' , '45' , '5' ),
