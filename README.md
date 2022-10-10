@@ -21,7 +21,7 @@ The first set of data will be from the months June 2022 - August 2022.
 * **query.sql** is SQL code to analyze my weightlifting data
 
 ## Curently Working On
-Updated 9/21/22: Analyzing data using PostgreSQL, adding a workout id.
+Updated 10/10/22 - Joining tables together in SQL, figuring out what problems I can answer by doing this. 
 
 ## LinkedIn Posts
 Below are relevant posts about the project:
