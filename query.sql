@@ -1,4 +1,4 @@
--- View the workout table
+-- Workout Information
 
 SELECT *
 FROM weightlifting.workout
@@ -25,6 +25,30 @@ LIMIT 5
 | 1          | 5           | 50         | 5    |
 | 1          | 5           | 55         | 5    |
 
+-- View Exercises Table
+
+SELECT *
+FROM weightlifting.exercises
+
+| exercise_id | exercise_name  | category_id |
+| ----------- | -------------- | ----------- |
+| 1           | Deadlift       | 4           |
+| 2           | Bench Press    | 1           |
+| 3           | Squat          | 3           |
+| 4           | Overhead Press | 1           |
+| 5           | Row            | 2           |
+
+-- View Categories Table
+
+SELECT *
+FROM weightlifting.categories
+
+| category_id | category_name |
+| ----------- | ------------- |
+| 1           | Push          |
+| 2           | Pull          |
+| 3           | Legs          |
+| 4           | Hinge         |
 
 -- JOIN Workout Table and Lifts Table by exercise_id
 
@@ -426,29 +450,4 @@ ORDER BY workout.workout_id;
 | 38         | 2022-08-30T00:00:00.000Z | 3           | 65         | 5    |
 | 38         | 2022-08-30T00:00:00.000Z | 1           | 95         | 6    |
 
--- View Exercises Table
-
-SELECT *
-FROM weightlifting.exercises
-
-| exercise_id | exercise_name  | category_id |
-| ----------- | -------------- | ----------- |
-| 1           | Deadlift       | 4           |
-| 2           | Bench Press    | 1           |
-| 3           | Squat          | 3           |
-| 4           | Overhead Press | 1           |
-| 5           | Row            | 2           |
-
--- View Categories Table
-
-SELECT *
-FROM weightlifting.categories
-
-| category_id | category_name |
-| ----------- | ------------- |
-| 1           | Push          |
-| 2           | Pull          |
-| 3           | Legs          |
-| 4           | Hinge         |
-
-
+-- Volume
