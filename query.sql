@@ -12,7 +12,7 @@ LIMIT 5
 | 4          | 2022-06-11T00:00:00.000Z |
 | 5          | 2022-06-12T00:00:00.000Z |
 
--- View Lifts Table
+-- Lifts 
 SELECT *
 FROM weightlifting.lifts
 LIMIT 5
@@ -25,7 +25,7 @@ LIMIT 5
 | 1          | 5           | 50         | 5    |
 | 1          | 5           | 55         | 5    |
 
--- View Exercises Table
+-- Exercises
 
 SELECT *
 FROM weightlifting.exercises
@@ -38,7 +38,7 @@ FROM weightlifting.exercises
 | 4           | Overhead Press | 1           |
 | 5           | Row            | 2           |
 
--- View Categories Table
+-- Categories
 
 SELECT *
 FROM weightlifting.categories
@@ -450,4 +450,155 @@ ORDER BY workout.workout_id;
 | 38         | 2022-08-30T00:00:00.000Z | 3           | 65         | 5    |
 | 38         | 2022-08-30T00:00:00.000Z | 1           | 95         | 6    |
 
--- Volume
+-- Average Weight per Lift
+SELECT 
+	AVG(lifts.weight_lbs) AS avg_weight_lbs, 
+	exercises.exercise_name 
+FROM weightlifting.lifts
+	INNER JOIN weightlifting.exercises
+ON lifts.exercise_id = exercises.exercise_id
+GROUP BY exercises.exercise_name
+
+| avg_weight_lbs     | exercise_name  |
+| ------------------ | -------------- |
+| 59.295081967213115 | Row            |
+| 101.15979381443299 | Deadlift       |
+| 46.37096774193548  | Overhead Press |
+| 63.545918367346935 | Squat          |
+| 57.84090909090909  | Bench Press    |
+
+-- Maximum Weight per Lift
+SELECT 
+	MAX(lifts.weight_lbs) AS max_weight_lbs, 
+	exercises.exercise_name 
+FROM weightlifting.lifts
+	INNER JOIN weightlifting.exercises
+ON lifts.exercise_id = exercises.exercise_id
+GROUP BY exercises.exercise_name
+
+| max_weight_lbs | exercise_name  |
+| -------------- | -------------- |
+| 65             | Row            |
+| 117.5          | Deadlift       |
+| 50             | Overhead Press |
+| 70             | Squat          |
+| 62.5           | Bench Press    |
+
+-- Minimum Weight per Lift
+SELECT 
+	MIN(lifts.weight_lbs) AS min_weight_lbs, 
+	exercises.exercise_name 
+FROM weightlifting.lifts
+	INNER JOIN weightlifting.exercises
+ON lifts.exercise_id = exercises.exercise_id
+GROUP BY exercises.exercise_name
+
+| min_weight_lbs | exercise_name  |
+| -------------- | -------------- |
+| 50             | Row            |
+| 75             | Deadlift       |
+| 40             | Overhead Press |
+| 45             | Squat          |
+| 50             | Bench Press    |
+
+-- How many exercises I did per workout
+SELECT 
+	COUNT(lifts.exercise_id) AS number_of_exercises,
+    	workout.workout_date
+FROM weightlifting.workout
+INNER JOIN weightlifting.lifts
+ON workout.workout_id = lifts.workout_id
+GROUP BY workout_date
+ORDER BY workout_date
+
+| number_of_exercises | workout_date             |
+| ------------------- | ------------------------ |
+| 9                   | 2022-06-05T00:00:00.000Z |
+| 8                   | 2022-06-07T00:00:00.000Z |
+| 12                  | 2022-06-09T00:00:00.000Z |
+| 10                  | 2022-06-11T00:00:00.000Z |
+| 15                  | 2022-06-12T00:00:00.000Z |
+| 10                  | 2022-06-15T00:00:00.000Z |
+| 10                  | 2022-06-18T00:00:00.000Z |
+| 12                  | 2022-06-19T00:00:00.000Z |
+| 10                  | 2022-06-21T00:00:00.000Z |
+| 15                  | 2022-06-23T00:00:00.000Z |
+| 10                  | 2022-06-25T00:00:00.000Z |
+| 15                  | 2022-06-26T00:00:00.000Z |
+| 5                   | 2022-06-28T00:00:00.000Z |
+| 10                  | 2022-07-02T00:00:00.000Z |
+| 10                  | 2022-07-03T00:00:00.000Z |
+| 8                   | 2022-07-05T00:00:00.000Z |
+| 15                  | 2022-07-08T00:00:00.000Z |
+| 10                  | 2022-07-09T00:00:00.000Z |
+| 15                  | 2022-07-10T00:00:00.000Z |
+| 10                  | 2022-07-12T00:00:00.000Z |
+| 10                  | 2022-07-16T00:00:00.000Z |
+| 15                  | 2022-07-17T00:00:00.000Z |
+| 10                  | 2022-07-22T00:00:00.000Z |
+| 12                  | 2022-07-24T00:00:00.000Z |
+| 8                   | 2022-07-26T00:00:00.000Z |
+| 8                   | 2022-07-30T00:00:00.000Z |
+| 8                   | 2022-08-02T00:00:00.000Z |
+| 4                   | 2022-08-05T00:00:00.000Z |
+| 12                  | 2022-08-07T00:00:00.000Z |
+| 8                   | 2022-08-09T00:00:00.000Z |
+| 12                  | 2022-08-11T00:00:00.000Z |
+| 8                   | 2022-08-18T00:00:00.000Z |
+| 4                   | 2022-08-20T00:00:00.000Z |
+| 12                  | 2022-08-21T00:00:00.000Z |
+| 8                   | 2022-08-23T00:00:00.000Z |
+| 8                   | 2022-08-25T00:00:00.000Z |
+| 8                   | 2022-08-26T00:00:00.000Z |
+| 10                  | 2022-08-30T00:00:00.000Z |
+
+-- Avg Weight per Workoutdate
+SELECT 
+	AVG(lifts.weight_lbs) AS avg_weight,
+    	workout.workout_date
+FROM weightlifting.workout
+INNER JOIN weightlifting.lifts
+ON workout.workout_id = lifts.workout_id
+GROUP BY workout_date
+ORDER BY workout_date
+
+| avg_weight         | workout_date             |
+| ------------------ | ------------------------ |
+| 51.111111111111114 | 2022-06-05T00:00:00.000Z |
+| 70                 | 2022-06-07T00:00:00.000Z |
+| 52.5               | 2022-06-09T00:00:00.000Z |
+| 67                 | 2022-06-11T00:00:00.000Z |
+| 53                 | 2022-06-12T00:00:00.000Z |
+| 72                 | 2022-06-15T00:00:00.000Z |
+| 75                 | 2022-06-18T00:00:00.000Z |
+| 53.333333333333336 | 2022-06-19T00:00:00.000Z |
+| 77.5               | 2022-06-21T00:00:00.000Z |
+| 57.666666666666664 | 2022-06-23T00:00:00.000Z |
+| 79.5               | 2022-06-25T00:00:00.000Z |
+| 56.333333333333336 | 2022-06-26T00:00:00.000Z |
+| 100                | 2022-06-28T00:00:00.000Z |
+| 85.5               | 2022-07-02T00:00:00.000Z |
+| 55                 | 2022-07-03T00:00:00.000Z |
+| 92.5               | 2022-07-05T00:00:00.000Z |
+| 55.666666666666664 | 2022-07-08T00:00:00.000Z |
+| 88.5               | 2022-07-09T00:00:00.000Z |
+| 56.333333333333336 | 2022-07-10T00:00:00.000Z |
+| 90.5               | 2022-07-12T00:00:00.000Z |
+| 92.75              | 2022-07-16T00:00:00.000Z |
+| 56.833333333333336 | 2022-07-17T00:00:00.000Z |
+| 90.5               | 2022-07-22T00:00:00.000Z |
+| 50                 | 2022-07-24T00:00:00.000Z |
+| 83.75              | 2022-07-26T00:00:00.000Z |
+| 86.5625            | 2022-07-30T00:00:00.000Z |
+| 81.875             | 2022-08-02T00:00:00.000Z |
+| 63.75              | 2022-08-05T00:00:00.000Z |
+| 51.041666666666664 | 2022-08-07T00:00:00.000Z |
+| 82.5               | 2022-08-09T00:00:00.000Z |
+| 54.166666666666664 | 2022-08-11T00:00:00.000Z |
+| 85.625             | 2022-08-18T00:00:00.000Z |
+| 66.25              | 2022-08-20T00:00:00.000Z |
+| 54.541666666666664 | 2022-08-21T00:00:00.000Z |
+| 87.5               | 2022-08-23T00:00:00.000Z |
+| 59.375             | 2022-08-25T00:00:00.000Z |
+| 83.75              | 2022-08-26T00:00:00.000Z |
+| 80                 | 2022-08-30T00:00:00.000Z |
