@@ -57,7 +57,7 @@ CREATE TABLE lifts (
 );
 
 INSERT INTO lifts
-   ("workout_id", "exercise_id", "weight_lbs", "reps", "volume")
+   ("workout_id", "exercise_id", "weight_lbs", "reps", "volume_lbs")
 VALUES
    ( '1',  '4' , '45' , '5' , '225' ),
    ( '1',  '4' , '45' , '5' , '225' ),
