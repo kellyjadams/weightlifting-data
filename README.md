@@ -13,7 +13,7 @@ The first set of data will be from the months June 2022 - August 2022.
 
 ### Links
 * Full article on my blog [here](https://www.kellyjadams.com/post/weightlifting-project). 
-* Explore my database on db-fiddle [here](https://www.db-fiddle.com/f/vSuQMqMWAtkJELP2gmPZNM/10).
+* Explore my database on db-fiddle [here](https://www.db-fiddle.com/f/vSuQMqMWAtkJELP2gmPZNM/13).
 
 ## Files
 * **schema.sql** is SQL code to create my own schema for my project
