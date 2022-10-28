@@ -50,7 +50,7 @@ FROM weightlifting.categories
 | 3           | Legs          |
 | 4           | Hinge         |
 
--- JOIN Workout Table and Lifts Table by exercise_id
+-- JOIN Workout Table and Lifts Table by workout_id
 
 SELECT workout.workout_id, 
 workout.workout_date,
@@ -506,7 +506,7 @@ SELECT
 	COUNT(lifts.exercise_id) AS number_of_exercises,
     	workout.workout_date
 FROM weightlifting.workout
-INNER JOIN weightlifting.lifts
+	INNER JOIN weightlifting.lifts
 ON workout.workout_id = lifts.workout_id
 GROUP BY workout_date
 ORDER BY workout_date
