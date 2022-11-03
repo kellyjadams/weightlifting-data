@@ -714,3 +714,28 @@ ORDER BY workout_date
 | 6.5000000000000000 | 2022-08-25T00:00:00.000Z |
 | 6.0000000000000000 | 2022-08-26T00:00:00.000Z |
 | 5.5000000000000000 | 2022-08-30T00:00:00.000Z |
+
+-- Total count for each category type 
+SELECT 
+    SUM( CASE 
+        WHEN categories.category_id = '1' THEN 1
+        WHEN categories.category_id = '2' THEN 1
+        WHEN categories.category_id = '3' THEN 1
+        WHEN categories.category_id = '4' THEN 1
+        END
+        ) AS category_count,
+     categories.category_name
+FROM weightlifting.exercises
+LEFT JOIN weightlifting.categories
+ON exercises.category_id = categories.category_id
+LEFT JOIN weightlifting.lifts
+ON exercises.exercise_id = lifts.exercise_id
+GROUP BY categories.category_name
+ORDER BY categories.category_name
+
+| category_count | category_name |
+| -------------- | ------------- |
+| 97             | Hinge         |
+| 98             | Legs          |
+| 61             | Pull          |
+| 128            | Push          |
