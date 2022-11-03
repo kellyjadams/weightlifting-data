@@ -25,7 +25,7 @@ The first set of data will be from the months June 2022 - August 2022.
 
 ## LinkedIn Posts
 Below are relevant posts about the project:
-* * [10/11/22](https://www.linkedin.com/posts/kellyjianadams_linkedinhardmode-dataanalytics-sql-activity-6993295959216586752-n1CZ?utm_source=share&utm_medium=member_desktop) - Update on project, the new tables I've created, and working on joining multiple tables. 
+* [11/1/22](https://www.linkedin.com/posts/kellyjianadams_linkedinhardmode-dataanalytics-sql-activity-6993295959216586752-n1CZ?utm_source=share&utm_medium=member_desktop) - Update on project, the new tables I've created, and working on joining multiple tables. 
 * [10/11/22](https://www.linkedin.com/posts/kellyjianadams_linkedinhardmode-dataanalytics-sql-activity-6985673150244016128-4LFr?utm_source=share&utm_medium=member_desktop) - Update on project, tables I will have and using JOINs. 
 * [9/13/22](https://www.linkedin.com/posts/kellyjianadams_linkedinhardmode-dataanalytics-portfolioproject-activity-6975535427982123009-N1LJ?utm_source=share&utm_medium=member_desktop) - Update on the project, creating the schema and tables. 
 * [8/25/22](https://www.linkedin.com/posts/kellyjianadams_linkedinhardmode-dataanalytics-personalproject-activity-6968651916721418241-mivC?utm_source=share&utm_medium=member_desktop) - More detail about the project including: the data; general process; and the question I'll be answering. 
