@@ -717,7 +717,7 @@ ORDER BY workout_date
 
 -- Total count for each category type 
 SELECT 
-    SUM( CASE 
+    COUNT( CASE 
         WHEN categories.category_id = '1' THEN 1
         WHEN categories.category_id = '2' THEN 1
         WHEN categories.category_id = '3' THEN 1
