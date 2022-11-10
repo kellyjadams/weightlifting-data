@@ -21,7 +21,7 @@ The first set of data will be from the months June 2022 - August 2022.
 * **query.sql** is SQL code to analyze my weightlifting data
 
 ## Curently Working On
-11/2/22 - Reviewing and finalizing the SQL Analysis of my project. Then I'll be moving onto visualizing it using Tableau. 
+11/9/22 - Visualizing my data using Tableau. 
 
 ## LinkedIn Posts
 Below are relevant posts about the project:
