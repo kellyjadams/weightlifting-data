@@ -451,6 +451,407 @@ ORDER BY workout.workout_id;
 | 38         | 2022-08-30T00:00:00.000Z | 3           | 65         | 5    | 73.13231323132312  |
 | 38         | 2022-08-30T00:00:00.000Z | 1           | 95         | 6    | 110.33681765389083 |
 
+-- Show the Exercise and Category for each lift entry
+SELECT 
+    lifts.workout_id,
+    exercises.exercise_id, 
+    exercises.exercise_name, 
+    categories.category_id, 
+    categories.category_name
+FROM weightlifting.exercises
+LEFT JOIN weightlifting.categories
+ON exercises.category_id = categories.category_id
+LEFT JOIN weightlifting.lifts
+ON exercises.exercise_id = lifts.exercise_id
+ORDER BY workout_id
+
+| workout_id | exercise_id | exercise_name  | category_id | category_name |
+| ---------- | ----------- | -------------- | ----------- | ------------- |
+| 1          | 4           | Overhead Press | 1           | Push          |
+| 1          | 5           | Row            | 2           | Pull          |
+| 1          | 2           | Bench Press    | 1           | Push          |
+| 1          | 4           | Overhead Press | 1           | Push          |
+| 1          | 2           | Bench Press    | 1           | Push          |
+| 1          | 4           | Overhead Press | 1           | Push          |
+| 1          | 2           | Bench Press    | 1           | Push          |
+| 1          | 5           | Row            | 2           | Pull          |
+| 1          | 5           | Row            | 2           | Pull          |
+| 2          | 1           | Deadlift       | 4           | Hinge         |
+| 2          | 3           | Squat          | 3           | Legs          |
+| 2          | 3           | Squat          | 3           | Legs          |
+| 2          | 3           | Squat          | 3           | Legs          |
+| 2          | 3           | Squat          | 3           | Legs          |
+| 2          | 1           | Deadlift       | 4           | Hinge         |
+| 2          | 1           | Deadlift       | 4           | Hinge         |
+| 2          | 1           | Deadlift       | 4           | Hinge         |
+| 3          | 2           | Bench Press    | 1           | Push          |
+| 3          | 4           | Overhead Press | 1           | Push          |
+| 3          | 5           | Row            | 2           | Pull          |
+| 3          | 5           | Row            | 2           | Pull          |
+| 3          | 2           | Bench Press    | 1           | Push          |
+| 3          | 4           | Overhead Press | 1           | Push          |
+| 3          | 4           | Overhead Press | 1           | Push          |
+| 3          | 2           | Bench Press    | 1           | Push          |
+| 3          | 4           | Overhead Press | 1           | Push          |
+| 3          | 2           | Bench Press    | 1           | Push          |
+| 3          | 5           | Row            | 2           | Pull          |
+| 3          | 5           | Row            | 2           | Pull          |
+| 4          | 3           | Squat          | 3           | Legs          |
+| 4          | 1           | Deadlift       | 4           | Hinge         |
+| 4          | 1           | Deadlift       | 4           | Hinge         |
+| 4          | 1           | Deadlift       | 4           | Hinge         |
+| 4          | 1           | Deadlift       | 4           | Hinge         |
+| 4          | 1           | Deadlift       | 4           | Hinge         |
+| 4          | 3           | Squat          | 3           | Legs          |
+| 4          | 3           | Squat          | 3           | Legs          |
+| 4          | 3           | Squat          | 3           | Legs          |
+| 4          | 3           | Squat          | 3           | Legs          |
+| 5          | 5           | Row            | 2           | Pull          |
+| 5          | 5           | Row            | 2           | Pull          |
+| 5          | 4           | Overhead Press | 1           | Push          |
+| 5          | 2           | Bench Press    | 1           | Push          |
+| 5          | 4           | Overhead Press | 1           | Push          |
+| 5          | 2           | Bench Press    | 1           | Push          |
+| 5          | 2           | Bench Press    | 1           | Push          |
+| 5          | 2           | Bench Press    | 1           | Push          |
+| 5          | 2           | Bench Press    | 1           | Push          |
+| 5          | 4           | Overhead Press | 1           | Push          |
+| 5          | 5           | Row            | 2           | Pull          |
+| 5          | 5           | Row            | 2           | Pull          |
+| 5          | 4           | Overhead Press | 1           | Push          |
+| 5          | 4           | Overhead Press | 1           | Push          |
+| 5          | 5           | Row            | 2           | Pull          |
+| 6          | 3           | Squat          | 3           | Legs          |
+| 6          | 1           | Deadlift       | 4           | Hinge         |
+| 6          | 1           | Deadlift       | 4           | Hinge         |
+| 6          | 1           | Deadlift       | 4           | Hinge         |
+| 6          | 1           | Deadlift       | 4           | Hinge         |
+| 6          | 1           | Deadlift       | 4           | Hinge         |
+| 6          | 3           | Squat          | 3           | Legs          |
+| 6          | 3           | Squat          | 3           | Legs          |
+| 6          | 3           | Squat          | 3           | Legs          |
+| 6          | 3           | Squat          | 3           | Legs          |
+| 7          | 1           | Deadlift       | 4           | Hinge         |
+| 7          | 3           | Squat          | 3           | Legs          |
+| 7          | 3           | Squat          | 3           | Legs          |
+| 7          | 3           | Squat          | 3           | Legs          |
+| 7          | 3           | Squat          | 3           | Legs          |
+| 7          | 3           | Squat          | 3           | Legs          |
+| 7          | 1           | Deadlift       | 4           | Hinge         |
+| 7          | 1           | Deadlift       | 4           | Hinge         |
+| 7          | 1           | Deadlift       | 4           | Hinge         |
+| 7          | 1           | Deadlift       | 4           | Hinge         |
+| 8          | 2           | Bench Press    | 1           | Push          |
+| 8          | 2           | Bench Press    | 1           | Push          |
+| 8          | 5           | Row            | 2           | Pull          |
+| 8          | 5           | Row            | 2           | Pull          |
+| 8          | 5           | Row            | 2           | Pull          |
+| 8          | 4           | Overhead Press | 1           | Push          |
+| 8          | 5           | Row            | 2           | Pull          |
+| 8          | 4           | Overhead Press | 1           | Push          |
+| 8          | 4           | Overhead Press | 1           | Push          |
+| 8          | 4           | Overhead Press | 1           | Push          |
+| 8          | 2           | Bench Press    | 1           | Push          |
+| 8          | 2           | Bench Press    | 1           | Push          |
+| 9          | 1           | Deadlift       | 4           | Hinge         |
+| 9          | 1           | Deadlift       | 4           | Hinge         |
+| 9          | 1           | Deadlift       | 4           | Hinge         |
+| 9          | 1           | Deadlift       | 4           | Hinge         |
+| 9          | 3           | Squat          | 3           | Legs          |
+| 9          | 3           | Squat          | 3           | Legs          |
+| 9          | 3           | Squat          | 3           | Legs          |
+| 9          | 3           | Squat          | 3           | Legs          |
+| 9          | 3           | Squat          | 3           | Legs          |
+| 9          | 1           | Deadlift       | 4           | Hinge         |
+| 10         | 4           | Overhead Press | 1           | Push          |
+| 10         | 2           | Bench Press    | 1           | Push          |
+| 10         | 5           | Row            | 2           | Pull          |
+| 10         | 5           | Row            | 2           | Pull          |
+| 10         | 2           | Bench Press    | 1           | Push          |
+| 10         | 2           | Bench Press    | 1           | Push          |
+| 10         | 5           | Row            | 2           | Pull          |
+| 10         | 4           | Overhead Press | 1           | Push          |
+| 10         | 4           | Overhead Press | 1           | Push          |
+| 10         | 4           | Overhead Press | 1           | Push          |
+| 10         | 4           | Overhead Press | 1           | Push          |
+| 10         | 5           | Row            | 2           | Pull          |
+| 10         | 2           | Bench Press    | 1           | Push          |
+| 10         | 5           | Row            | 2           | Pull          |
+| 10         | 2           | Bench Press    | 1           | Push          |
+| 11         | 3           | Squat          | 3           | Legs          |
+| 11         | 1           | Deadlift       | 4           | Hinge         |
+| 11         | 1           | Deadlift       | 4           | Hinge         |
+| 11         | 1           | Deadlift       | 4           | Hinge         |
+| 11         | 1           | Deadlift       | 4           | Hinge         |
+| 11         | 1           | Deadlift       | 4           | Hinge         |
+| 11         | 3           | Squat          | 3           | Legs          |
+| 11         | 3           | Squat          | 3           | Legs          |
+| 11         | 3           | Squat          | 3           | Legs          |
+| 11         | 3           | Squat          | 3           | Legs          |
+| 12         | 4           | Overhead Press | 1           | Push          |
+| 12         | 5           | Row            | 2           | Pull          |
+| 12         | 4           | Overhead Press | 1           | Push          |
+| 12         | 4           | Overhead Press | 1           | Push          |
+| 12         | 5           | Row            | 2           | Pull          |
+| 12         | 2           | Bench Press    | 1           | Push          |
+| 12         | 2           | Bench Press    | 1           | Push          |
+| 12         | 2           | Bench Press    | 1           | Push          |
+| 12         | 5           | Row            | 2           | Pull          |
+| 12         | 5           | Row            | 2           | Pull          |
+| 12         | 2           | Bench Press    | 1           | Push          |
+| 12         | 2           | Bench Press    | 1           | Push          |
+| 12         | 5           | Row            | 2           | Pull          |
+| 12         | 4           | Overhead Press | 1           | Push          |
+| 12         | 4           | Overhead Press | 1           | Push          |
+| 13         | 1           | Deadlift       | 4           | Hinge         |
+| 13         | 1           | Deadlift       | 4           | Hinge         |
+| 13         | 1           | Deadlift       | 4           | Hinge         |
+| 13         | 1           | Deadlift       | 4           | Hinge         |
+| 13         | 1           | Deadlift       | 4           | Hinge         |
+| 14         | 3           | Squat          | 3           | Legs          |
+| 14         | 3           | Squat          | 3           | Legs          |
+| 14         | 1           | Deadlift       | 4           | Hinge         |
+| 14         | 3           | Squat          | 3           | Legs          |
+| 14         | 3           | Squat          | 3           | Legs          |
+| 14         | 1           | Deadlift       | 4           | Hinge         |
+| 14         | 3           | Squat          | 3           | Legs          |
+| 14         | 1           | Deadlift       | 4           | Hinge         |
+| 14         | 1           | Deadlift       | 4           | Hinge         |
+| 14         | 1           | Deadlift       | 4           | Hinge         |
+| 15         | 4           | Overhead Press | 1           | Push          |
+| 15         | 4           | Overhead Press | 1           | Push          |
+| 15         | 4           | Overhead Press | 1           | Push          |
+| 15         | 2           | Bench Press    | 1           | Push          |
+| 15         | 2           | Bench Press    | 1           | Push          |
+| 15         | 4           | Overhead Press | 1           | Push          |
+| 15         | 2           | Bench Press    | 1           | Push          |
+| 15         | 2           | Bench Press    | 1           | Push          |
+| 15         | 2           | Bench Press    | 1           | Push          |
+| 15         | 4           | Overhead Press | 1           | Push          |
+| 16         | 1           | Deadlift       | 4           | Hinge         |
+| 16         | 1           | Deadlift       | 4           | Hinge         |
+| 16         | 1           | Deadlift       | 4           | Hinge         |
+| 16         | 1           | Deadlift       | 4           | Hinge         |
+| 16         | 1           | Deadlift       | 4           | Hinge         |
+| 16         | 3           | Squat          | 3           | Legs          |
+| 16         | 3           | Squat          | 3           | Legs          |
+| 16         | 3           | Squat          | 3           | Legs          |
+| 17         | 2           | Bench Press    | 1           | Push          |
+| 17         | 5           | Row            | 2           | Pull          |
+| 17         | 5           | Row            | 2           | Pull          |
+| 17         | 5           | Row            | 2           | Pull          |
+| 17         | 2           | Bench Press    | 1           | Push          |
+| 17         | 2           | Bench Press    | 1           | Push          |
+| 17         | 2           | Bench Press    | 1           | Push          |
+| 17         | 2           | Bench Press    | 1           | Push          |
+| 17         | 5           | Row            | 2           | Pull          |
+| 17         | 5           | Row            | 2           | Pull          |
+| 17         | 4           | Overhead Press | 1           | Push          |
+| 17         | 4           | Overhead Press | 1           | Push          |
+| 17         | 4           | Overhead Press | 1           | Push          |
+| 17         | 4           | Overhead Press | 1           | Push          |
+| 17         | 4           | Overhead Press | 1           | Push          |
+| 18         | 1           | Deadlift       | 4           | Hinge         |
+| 18         | 1           | Deadlift       | 4           | Hinge         |
+| 18         | 1           | Deadlift       | 4           | Hinge         |
+| 18         | 1           | Deadlift       | 4           | Hinge         |
+| 18         | 1           | Deadlift       | 4           | Hinge         |
+| 18         | 3           | Squat          | 3           | Legs          |
+| 18         | 3           | Squat          | 3           | Legs          |
+| 18         | 3           | Squat          | 3           | Legs          |
+| 18         | 3           | Squat          | 3           | Legs          |
+| 18         | 3           | Squat          | 3           | Legs          |
+| 19         | 5           | Row            | 2           | Pull          |
+| 19         | 5           | Row            | 2           | Pull          |
+| 19         | 2           | Bench Press    | 1           | Push          |
+| 19         | 4           | Overhead Press | 1           | Push          |
+| 19         | 4           | Overhead Press | 1           | Push          |
+| 19         | 4           | Overhead Press | 1           | Push          |
+| 19         | 4           | Overhead Press | 1           | Push          |
+| 19         | 4           | Overhead Press | 1           | Push          |
+| 19         | 2           | Bench Press    | 1           | Push          |
+| 19         | 2           | Bench Press    | 1           | Push          |
+| 19         | 5           | Row            | 2           | Pull          |
+| 19         | 5           | Row            | 2           | Pull          |
+| 19         | 5           | Row            | 2           | Pull          |
+| 19         | 2           | Bench Press    | 1           | Push          |
+| 19         | 2           | Bench Press    | 1           | Push          |
+| 20         | 3           | Squat          | 3           | Legs          |
+| 20         | 3           | Squat          | 3           | Legs          |
+| 20         | 1           | Deadlift       | 4           | Hinge         |
+| 20         | 1           | Deadlift       | 4           | Hinge         |
+| 20         | 1           | Deadlift       | 4           | Hinge         |
+| 20         | 1           | Deadlift       | 4           | Hinge         |
+| 20         | 1           | Deadlift       | 4           | Hinge         |
+| 20         | 3           | Squat          | 3           | Legs          |
+| 20         | 3           | Squat          | 3           | Legs          |
+| 20         | 3           | Squat          | 3           | Legs          |
+| 21         | 1           | Deadlift       | 4           | Hinge         |
+| 21         | 1           | Deadlift       | 4           | Hinge         |
+| 21         | 1           | Deadlift       | 4           | Hinge         |
+| 21         | 3           | Squat          | 3           | Legs          |
+| 21         | 3           | Squat          | 3           | Legs          |
+| 21         | 3           | Squat          | 3           | Legs          |
+| 21         | 3           | Squat          | 3           | Legs          |
+| 21         | 3           | Squat          | 3           | Legs          |
+| 21         | 1           | Deadlift       | 4           | Hinge         |
+| 21         | 1           | Deadlift       | 4           | Hinge         |
+| 22         | 4           | Overhead Press | 1           | Push          |
+| 22         | 4           | Overhead Press | 1           | Push          |
+| 22         | 4           | Overhead Press | 1           | Push          |
+| 22         | 4           | Overhead Press | 1           | Push          |
+| 22         | 5           | Row            | 2           | Pull          |
+| 22         | 5           | Row            | 2           | Pull          |
+| 22         | 2           | Bench Press    | 1           | Push          |
+| 22         | 2           | Bench Press    | 1           | Push          |
+| 22         | 2           | Bench Press    | 1           | Push          |
+| 22         | 2           | Bench Press    | 1           | Push          |
+| 22         | 5           | Row            | 2           | Pull          |
+| 22         | 5           | Row            | 2           | Pull          |
+| 22         | 5           | Row            | 2           | Pull          |
+| 22         | 4           | Overhead Press | 1           | Push          |
+| 22         | 2           | Bench Press    | 1           | Push          |
+| 23         | 3           | Squat          | 3           | Legs          |
+| 23         | 1           | Deadlift       | 4           | Hinge         |
+| 23         | 1           | Deadlift       | 4           | Hinge         |
+| 23         | 3           | Squat          | 3           | Legs          |
+| 23         | 3           | Squat          | 3           | Legs          |
+| 23         | 3           | Squat          | 3           | Legs          |
+| 23         | 3           | Squat          | 3           | Legs          |
+| 23         | 1           | Deadlift       | 4           | Hinge         |
+| 23         | 1           | Deadlift       | 4           | Hinge         |
+| 23         | 1           | Deadlift       | 4           | Hinge         |
+| 24         | 5           | Row            | 2           | Pull          |
+| 24         | 5           | Row            | 2           | Pull          |
+| 24         | 4           | Overhead Press | 1           | Push          |
+| 24         | 2           | Bench Press    | 1           | Push          |
+| 24         | 2           | Bench Press    | 1           | Push          |
+| 24         | 5           | Row            | 2           | Pull          |
+| 24         | 2           | Bench Press    | 1           | Push          |
+| 24         | 5           | Row            | 2           | Pull          |
+| 24         | 4           | Overhead Press | 1           | Push          |
+| 24         | 4           | Overhead Press | 1           | Push          |
+| 24         | 4           | Overhead Press | 1           | Push          |
+| 24         | 2           | Bench Press    | 1           | Push          |
+| 25         | 3           | Squat          | 3           | Legs          |
+| 25         | 3           | Squat          | 3           | Legs          |
+| 25         | 3           | Squat          | 3           | Legs          |
+| 25         | 1           | Deadlift       | 4           | Hinge         |
+| 25         | 3           | Squat          | 3           | Legs          |
+| 25         | 1           | Deadlift       | 4           | Hinge         |
+| 25         | 1           | Deadlift       | 4           | Hinge         |
+| 25         | 1           | Deadlift       | 4           | Hinge         |
+| 26         | 3           | Squat          | 3           | Legs          |
+| 26         | 3           | Squat          | 3           | Legs          |
+| 26         | 3           | Squat          | 3           | Legs          |
+| 26         | 3           | Squat          | 3           | Legs          |
+| 26         | 1           | Deadlift       | 4           | Hinge         |
+| 26         | 1           | Deadlift       | 4           | Hinge         |
+| 26         | 1           | Deadlift       | 4           | Hinge         |
+| 26         | 1           | Deadlift       | 4           | Hinge         |
+| 27         | 1           | Deadlift       | 4           | Hinge         |
+| 27         | 3           | Squat          | 3           | Legs          |
+| 27         | 1           | Deadlift       | 4           | Hinge         |
+| 27         | 1           | Deadlift       | 4           | Hinge         |
+| 27         | 1           | Deadlift       | 4           | Hinge         |
+| 27         | 3           | Squat          | 3           | Legs          |
+| 27         | 3           | Squat          | 3           | Legs          |
+| 27         | 3           | Squat          | 3           | Legs          |
+| 28         | 3           | Squat          | 3           | Legs          |
+| 28         | 3           | Squat          | 3           | Legs          |
+| 28         | 3           | Squat          | 3           | Legs          |
+| 28         | 3           | Squat          | 3           | Legs          |
+| 29         | 5           | Row            | 2           | Pull          |
+| 29         | 2           | Bench Press    | 1           | Push          |
+| 29         | 2           | Bench Press    | 1           | Push          |
+| 29         | 2           | Bench Press    | 1           | Push          |
+| 29         | 2           | Bench Press    | 1           | Push          |
+| 29         | 4           | Overhead Press | 1           | Push          |
+| 29         | 4           | Overhead Press | 1           | Push          |
+| 29         | 4           | Overhead Press | 1           | Push          |
+| 29         | 4           | Overhead Press | 1           | Push          |
+| 29         | 5           | Row            | 2           | Pull          |
+| 29         | 5           | Row            | 2           | Pull          |
+| 29         | 5           | Row            | 2           | Pull          |
+| 30         | 3           | Squat          | 3           | Legs          |
+| 30         | 3           | Squat          | 3           | Legs          |
+| 30         | 3           | Squat          | 3           | Legs          |
+| 30         | 3           | Squat          | 3           | Legs          |
+| 30         | 1           | Deadlift       | 4           | Hinge         |
+| 30         | 1           | Deadlift       | 4           | Hinge         |
+| 30         | 1           | Deadlift       | 4           | Hinge         |
+| 30         | 1           | Deadlift       | 4           | Hinge         |
+| 31         | 2           | Bench Press    | 1           | Push          |
+| 31         | 2           | Bench Press    | 1           | Push          |
+| 31         | 2           | Bench Press    | 1           | Push          |
+| 31         | 4           | Overhead Press | 1           | Push          |
+| 31         | 4           | Overhead Press | 1           | Push          |
+| 31         | 4           | Overhead Press | 1           | Push          |
+| 31         | 4           | Overhead Press | 1           | Push          |
+| 31         | 2           | Bench Press    | 1           | Push          |
+| 31         | 5           | Row            | 2           | Pull          |
+| 31         | 5           | Row            | 2           | Pull          |
+| 31         | 5           | Row            | 2           | Pull          |
+| 31         | 5           | Row            | 2           | Pull          |
+| 32         | 1           | Deadlift       | 4           | Hinge         |
+| 32         | 1           | Deadlift       | 4           | Hinge         |
+| 32         | 1           | Deadlift       | 4           | Hinge         |
+| 32         | 3           | Squat          | 3           | Legs          |
+| 32         | 3           | Squat          | 3           | Legs          |
+| 32         | 3           | Squat          | 3           | Legs          |
+| 32         | 3           | Squat          | 3           | Legs          |
+| 32         | 1           | Deadlift       | 4           | Hinge         |
+| 33         | 3           | Squat          | 3           | Legs          |
+| 33         | 3           | Squat          | 3           | Legs          |
+| 33         | 3           | Squat          | 3           | Legs          |
+| 33         | 3           | Squat          | 3           | Legs          |
+| 34         | 5           | Row            | 2           | Pull          |
+| 34         | 4           | Overhead Press | 1           | Push          |
+| 34         | 4           | Overhead Press | 1           | Push          |
+| 34         | 4           | Overhead Press | 1           | Push          |
+| 34         | 2           | Bench Press    | 1           | Push          |
+| 34         | 2           | Bench Press    | 1           | Push          |
+| 34         | 2           | Bench Press    | 1           | Push          |
+| 34         | 5           | Row            | 2           | Pull          |
+| 34         | 5           | Row            | 2           | Pull          |
+| 34         | 2           | Bench Press    | 1           | Push          |
+| 34         | 4           | Overhead Press | 1           | Push          |
+| 34         | 5           | Row            | 2           | Pull          |
+| 35         | 1           | Deadlift       | 4           | Hinge         |
+| 35         | 1           | Deadlift       | 4           | Hinge         |
+| 35         | 1           | Deadlift       | 4           | Hinge         |
+| 35         | 1           | Deadlift       | 4           | Hinge         |
+| 35         | 3           | Squat          | 3           | Legs          |
+| 35         | 3           | Squat          | 3           | Legs          |
+| 35         | 3           | Squat          | 3           | Legs          |
+| 35         | 3           | Squat          | 3           | Legs          |
+| 36         | 5           | Row            | 2           | Pull          |
+| 36         | 5           | Row            | 2           | Pull          |
+| 36         | 5           | Row            | 2           | Pull          |
+| 36         | 2           | Bench Press    | 1           | Push          |
+| 36         | 2           | Bench Press    | 1           | Push          |
+| 36         | 5           | Row            | 2           | Pull          |
+| 36         | 2           | Bench Press    | 1           | Push          |
+| 36         | 2           | Bench Press    | 1           | Push          |
+| 37         | 1           | Deadlift       | 4           | Hinge         |
+| 37         | 3           | Squat          | 3           | Legs          |
+| 37         | 1           | Deadlift       | 4           | Hinge         |
+| 37         | 1           | Deadlift       | 4           | Hinge         |
+| 37         | 1           | Deadlift       | 4           | Hinge         |
+| 37         | 3           | Squat          | 3           | Legs          |
+| 37         | 3           | Squat          | 3           | Legs          |
+| 37         | 3           | Squat          | 3           | Legs          |
+| 38         | 1           | Deadlift       | 4           | Hinge         |
+| 38         | 3           | Squat          | 3           | Legs          |
+| 38         | 3           | Squat          | 3           | Legs          |
+| 38         | 1           | Deadlift       | 4           | Hinge         |
+| 38         | 3           | Squat          | 3           | Legs          |
+| 38         | 3           | Squat          | 3           | Legs          |
+| 38         | 3           | Squat          | 3           | Legs          |
+| 38         | 1           | Deadlift       | 4           | Hinge         |
+| 38         | 1           | Deadlift       | 4           | Hinge         |
+| 38         | 1           | Deadlift       | 4           | Hinge         |
+
 -- Average Weight per Lift
 SELECT 
 	AVG(lifts.weight_lbs) AS avg_weight_lbs, 
