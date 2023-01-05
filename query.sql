@@ -1,5 +1,4 @@
 -- Workout Information
-
 SELECT *
 FROM weightlifting.workout
 LIMIT 5 
@@ -1066,7 +1065,6 @@ ORDER BY workout.workout_date;
 | 4475         | 2022-08-30T00:00:00.000Z |
 
 -- Average Repetitions per Workout Date
-
 SELECT 
 	AVG(lifts.reps) AS repetitions,
     workout.workout_date
