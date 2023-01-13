@@ -13,7 +13,7 @@ The first set of data will be from the months June 2022 - August 2022.
 
 ### 🔗 Links
 * [Tableau Dashboard](https://public.tableau.com/views/WeightliftingProject/Final?:language=en-US&:display_count=n&:origin=viz_share_link).
-* [Written Article](https://www.kellyjadams.com/post/weightlifting-project). 
+* [Article](https://www.kellyjadams.com/post/weightlifting-project). 
 * [Explore my database using db-fiddle](https://www.db-fiddle.com/f/vSuQMqMWAtkJELP2gmPZNM/13).
 
 ## 📁 Files
