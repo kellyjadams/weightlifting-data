@@ -1004,17 +1004,9 @@ ORDER BY workout_date
 | 83.75              | 2022-08-26T00:00:00.000Z |
 | 80                 | 2022-08-30T00:00:00.000Z |
 
--- Volume per Date
+-- Total Volume per Date
 SELECT 
-SUM(
-      CASE
-        WHEN lifts.exercise_id = '1' THEN lifts.volume_lbs
-        WHEN lifts.exercise_id = '2' THEN lifts.volume_lbs
-        WHEN lifts.exercise_id = '3' THEN lifts.volume_lbs
-        WHEN lifts.exercise_id = '4' THEN lifts.volume_lbs
-        WHEN lifts.exercise_id = '5' THEN lifts.volume_lbs
-        END 
-  ) AS total_volume,
+SUM(lifts.volume_lbs) AS total_volume,
   workout.workout_date
 FROM
 	weightlifting.workout
@@ -1063,6 +1055,32 @@ ORDER BY workout.workout_date;
 | 3080         | 2022-08-25T00:00:00.000Z |
 | 4120         | 2022-08-26T00:00:00.000Z |
 | 4475         | 2022-08-30T00:00:00.000Z |
+
+--Total volume per exercise 
+SELECT
+SUM(
+      CASE
+        WHEN lifts.exercise_id = '1' THEN lifts.volume_lbs
+        WHEN lifts.exercise_id = '2' THEN lifts.volume_lbs
+        WHEN lifts.exercise_id = '3' THEN lifts.volume_lbs
+        WHEN lifts.exercise_id = '4' THEN lifts.volume_lbs
+        WHEN lifts.exercise_id = '5' THEN lifts.volume_lbs
+        END 
+  ) AS total_volume,
+  exercises.exercise_name
+FROM 
+	weightlifting.lifts
+    INNER JOIN weightlifting.exercises
+    ON lifts.exercise_id = exercises.exercise_id
+GROUP BY exercises.exercise_name;
+
+| total_volume | exercise_name  |
+| ------------ | -------------- |
+| 18394        | Row            |
+| 48064        | Deadlift       |
+| 13495        | Overhead Press |
+| 30490        | Squat          |
+| 18957.5      | Bench Press    |
 
 -- Average Repetitions per Workout Date
 SELECT 
