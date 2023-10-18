@@ -13,9 +13,9 @@ I'll be tracking/analyzing 5 main barbell lifts:
 The second set of data is from June 1, 2022 to June 4, 2023. This project is in progress. 
 
 #### 🔗 Links
-* **Work in Progress**[Tableau Dashboard](https://public.tableau.com/views/WeightliftingProject/Final?:language=en-US&:display_count=n&:origin=viz_share_link).
-* **Work in Progress**[Article](https://www.kellyjadams.com/post/weightlifting-project). 
-* **Work in Progress**[Explore my database using db-fiddle](https://www.db-fiddle.com/f/vSuQMqMWAtkJELP2gmPZNM/13). **Work in Progress**
+* **Work in Progress** [Tableau Dashboard](https://public.tableau.com/views/WeightliftingProject/Final?:language=en-US&:display_count=n&:origin=viz_share_link).
+* **Work in Progress** [Article](https://www.kellyjadams.com/post/weightlifting-project). 
+* **Work in Progress** [Explore my database using db-fiddle](https://www.db-fiddle.com/f/vSuQMqMWAtkJELP2gmPZNM/13). 
 
 ### 📁 Files
 * [query-v2.sql](https://github.com/kellyjadams/weightlifting-data/blob/main/query-v2.sql) is SQL code includes the queries I used to analyze my weightlifting data.
