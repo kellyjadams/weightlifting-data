@@ -1,9 +1,10 @@
 -- V2 of my Weightlifting Schema
--- This is data from June 1, 2022 to June 1, 2023. 
+-- This is data from June 5, 2022 to June 3, 2023. 
 
 CREATE SCHEMA weightlifting;
 SET search_path = weightlifting;
 
+-- Workout Table 
 CREATE TABLE workout (
    "workout_id" INTEGER, 
    "workout_date" DATE
@@ -51,6 +52,7 @@ VALUES
    ( '37', '2022-08-26' ), 
    ( '38', '2022-08-30' );
 
+-- Lifts Table 
 CREATE TABLE lifts (
    "workout_id" INTEGER,
    "exercise_id" INTEGER,
@@ -447,6 +449,7 @@ VALUES
    ( '38',  '3' , '65' , '5' , '325' ),
    ( '38',  '1' , '95' , '6' , '570' );
 
+-- Exercises Table 
 CREATE TABLE exercises (
   "exercise_id" INTEGER,
   "exercise_name" VARCHAR(50),
@@ -462,6 +465,7 @@ VALUES
    ('4', 'Overhead Press', '1'),
    ('5', 'Row', '2');
 
+-- Categories Table 
 CREATE TABLE categories (
   "category_id" INTEGER,
   "category_name" VARCHAR(50)
@@ -474,3 +478,15 @@ VALUES
    ('2', 'Pull'),
    ('3', 'Legs'),
    ('4', 'Hinge');
+
+-- Workout Type Table 
+CREATE TABLE workout_type (
+  "workout_type_id" INTEGER,
+  "workout_type_name" VARCHAR(50)
+); 
+
+INSERT INTO workout_type
+    ("workout_type_id", "workout_type_name")
+VALUES
+   ('1', 'Strength'),
+   ('2', 'Hypertrophy');
