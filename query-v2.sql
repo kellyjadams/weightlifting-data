@@ -1,10 +1,3 @@
-/*
-
-This is V2 of my Weightlifting Project
-It is analyzing data between June 1, 2022 to June 4, 2023
-
-*/
-
 -- Workout Information
 SELECT *
 FROM weightlifting.workout
@@ -56,21 +49,29 @@ FROM weightlifting.categories
 | 3           | Legs          |
 | 4           | Hinge         |
 
+-- Workout Type 
+| wokrout_type_id | workout_type_name |
+| --------------- | ----------------- |
+| 1               | Strength          |
+| 2               | Hypertrophy       |
+
 -- JOIN Workout Table and Lifts Table by workout_id and created a new column to calculate the estimated 1RM
 
-SELECT workout.workout_id, 
-workout.workout_date,
-lifts.exercise_id,
-lifts.weight_lbs,
-lifts.reps,
-lifts.weight_lbs/(1.0278 - (0.0278 * lifts.reps)) AS est_one_rep_max
+SELECT 
+  workout.workout_id, 
+  workout.workout_date,
+  lifts.exercise_id,
+  lifts.weight_lbs,
+  lifts.reps,
+  lifts.weight_lbs/(1.0278 - (0.0278 * lifts.reps)) AS est_one_rep_max
 FROM
 	weightlifting.workout
   INNER JOIN weightlifting.lifts
 ON workout.workout_id = lifts.workout_id
 ORDER BY workout.workout_id;
 
--- Shortened
+-- Note this only shows the workout (workout_id = 1 ) but the query returns all information 
+
 | workout_id | workout_date             | exercise_id | weight_lbs | reps | est_one_rep_max    |
 | ---------- | ------------------------ | ----------- | ---------- | ---- | ------------------ |
 | 1          | 2022-06-05T00:00:00.000Z | 4           | 45         | 5    | 50.63006300630063  |
@@ -82,51 +83,6 @@ ORDER BY workout.workout_id;
 | 1          | 2022-06-05T00:00:00.000Z | 2           | 50         | 5    | 56.255625562556254 |
 | 1          | 2022-06-05T00:00:00.000Z | 2           | 50         | 5    | 56.255625562556254 |
 | 1          | 2022-06-05T00:00:00.000Z | 2           | 55         | 5    | 61.88118811881188  |
-| 2          | 2022-06-07T00:00:00.000Z | 1           | 85         | 4    | 92.7340170194196   |
-| 2          | 2022-06-07T00:00:00.000Z | 1           | 85         | 4    | 92.7340170194196   |
-| 2          | 2022-06-07T00:00:00.000Z | 1           | 85         | 4    | 92.7340170194196   |
-| 2          | 2022-06-07T00:00:00.000Z | 1           | 95         | 2    | 97.71651923472537  |
-| 2          | 2022-06-07T00:00:00.000Z | 3           | 45         | 5    | 50.63006300630063  |
-| 2          | 2022-06-07T00:00:00.000Z | 3           | 50         | 5    | 56.255625562556254 |
-| 2          | 2022-06-07T00:00:00.000Z | 3           | 55         | 5    | 61.88118811881188  |
-| 2          | 2022-06-07T00:00:00.000Z | 3           | 60         | 3    | 63.53240152477763  |
-| 3          | 2022-06-09T00:00:00.000Z | 4           | 45         | 5    | 50.63006300630063  |
-| 3          | 2022-06-09T00:00:00.000Z | 4           | 50         | 4    | 54.54942177612917  |
-| 3          | 2022-06-09T00:00:00.000Z | 4           | 50         | 4    | 54.54942177612917  |
-| 3          | 2022-06-09T00:00:00.000Z | 5           | 55         | 5    | 61.88118811881188  |
-| 3          | 2022-06-09T00:00:00.000Z | 5           | 55         | 5    | 61.88118811881188  |
-| 3          | 2022-06-09T00:00:00.000Z | 5           | 60         | 5    | 67.50675067506751  |
-| 3          | 2022-06-09T00:00:00.000Z | 2           | 50         | 5    | 56.255625562556254 |
-| 3          | 2022-06-09T00:00:00.000Z | 2           | 55         | 5    | 61.88118811881188  |
-| 3          | 2022-06-09T00:00:00.000Z | 2           | 55         | 5    | 61.88118811881188  |
-| 3          | 2022-06-09T00:00:00.000Z | 4           | 45         | 6    | 52.26480836236934  |
-| 3          | 2022-06-09T00:00:00.000Z | 5           | 60         | 5    | 67.50675067506751  |
-| 3          | 2022-06-09T00:00:00.000Z | 2           | 50         | 6    | 58.07200929152149  |
-| 4          | 2022-06-11T00:00:00.000Z | 1           | 75         | 5    | 84.38343834383438  |
-| 4          | 2022-06-11T00:00:00.000Z | 1           | 80         | 5    | 90.00900090009     |
-| 4          | 2022-06-11T00:00:00.000Z | 1           | 80         | 5    | 90.00900090009     |
-| 4          | 2022-06-11T00:00:00.000Z | 1           | 80         | 5    | 90.00900090009     |
-| 4          | 2022-06-11T00:00:00.000Z | 1           | 85         | 5    | 95.63456345634563  |
-| 4          | 2022-06-11T00:00:00.000Z | 3           | 50         | 5    | 56.255625562556254 |
-| 4          | 2022-06-11T00:00:00.000Z | 3           | 50         | 5    | 56.255625562556254 |
-| 4          | 2022-06-11T00:00:00.000Z | 3           | 55         | 5    | 61.88118811881188  |
-| 4          | 2022-06-11T00:00:00.000Z | 3           | 55         | 5    | 61.88118811881188  |
-| 4          | 2022-06-11T00:00:00.000Z | 3           | 60         | 5    | 67.50675067506751  |
-| 5          | 2022-06-12T00:00:00.000Z | 4           | 45         | 5    | 50.63006300630063  |
-| 5          | 2022-06-12T00:00:00.000Z | 4           | 45         | 5    | 50.63006300630063  |
-| 5          | 2022-06-12T00:00:00.000Z | 4           | 45         | 5    | 50.63006300630063  |
-| 5          | 2022-06-12T00:00:00.000Z | 4           | 45         | 5    | 50.63006300630063  |
-| 5          | 2022-06-12T00:00:00.000Z | 5           | 55         | 5    | 61.88118811881188  |
-| 5          | 2022-06-12T00:00:00.000Z | 5           | 55         | 5    | 61.88118811881188  |
-| 5          | 2022-06-12T00:00:00.000Z | 5           | 60         | 5    | 67.50675067506751  |
-| 5          | 2022-06-12T00:00:00.000Z | 5           | 60         | 5    | 67.50675067506751  |
-| 5          | 2022-06-12T00:00:00.000Z | 2           | 55         | 5    | 61.88118811881188  |
-| 5          | 2022-06-12T00:00:00.000Z | 2           | 55         | 5    | 61.88118811881188  |
-| 5          | 2022-06-12T00:00:00.000Z | 2           | 55         | 5    | 61.88118811881188  |
-| 5          | 2022-06-12T00:00:00.000Z | 2           | 55         | 5    | 61.88118811881188  |
-| 5          | 2022-06-12T00:00:00.000Z | 4           | 45         | 5    | 50.63006300630063  |
-| 5          | 2022-06-12T00:00:00.000Z | 5           | 65         | 3    | 68.82676831850911  |
-| 5          | 2022-06-12T00:00:00.000Z | 2           | 55         | 5    | 61.88118811881188  |
 
 
 -- Show the Exercise and Category for each lift entry
@@ -143,7 +99,7 @@ LEFT JOIN weightlifting.lifts
 ON exercises.exercise_id = lifts.exercise_id
 ORDER BY workout_id
 
--- Shortened
+-- Note this only shows the workout (workout_id = 1 ) but the query returns all information 
 | workout_id | exercise_id | exercise_name  | category_id | category_name |
 | ---------- | ----------- | -------------- | ----------- | ------------- |
 | 1          | 4           | Overhead Press | 1           | Push          |
@@ -155,22 +111,7 @@ ORDER BY workout_id
 | 1          | 2           | Bench Press    | 1           | Push          |
 | 1          | 5           | Row            | 2           | Pull          |
 | 1          | 5           | Row            | 2           | Pull          |
-| 2          | 1           | Deadlift       | 4           | Hinge         |
-| 2          | 3           | Squat          | 3           | Legs          |
-| 2          | 3           | Squat          | 3           | Legs          |
-| 2          | 3           | Squat          | 3           | Legs          |
-| 2          | 3           | Squat          | 3           | Legs          |
-| 2          | 1           | Deadlift       | 4           | Hinge         |
-| 2          | 1           | Deadlift       | 4           | Hinge         |
-| 2          | 1           | Deadlift       | 4           | Hinge         |
-| 3          | 2           | Bench Press    | 1           | Push          |
-| 3          | 4           | Overhead Press | 1           | Push          |
-| 3          | 5           | Row            | 2           | Pull          |
-| 3          | 5           | Row            | 2           | Pull          |
-| 3          | 2           | Bench Press    | 1           | Push          |
-| 3          | 4           | Overhead Press | 1           | Push          |
-| 3          | 4           | Overhead Press | 1           | Push          |
-| 3          | 2           | Bench Press    | 1           | Push          |
+
 
 -- Average Weight per Lift
 SELECT 
@@ -226,14 +167,13 @@ GROUP BY exercises.exercise_name
 -- How many exercises I did per workout
 SELECT 
 	COUNT(lifts.exercise_id) AS number_of_exercises,
-    	workout.workout_date
+  workout.workout_date::date
 FROM weightlifting.workout
 	INNER JOIN weightlifting.lifts
 ON workout.workout_id = lifts.workout_id
 GROUP BY workout_date
 ORDER BY workout_date
 
-  -- Shortened
 | number_of_exercises | workout_date             |
 | ------------------- | ------------------------ |
 | 9                   | 2022-06-05T00:00:00.000Z |
@@ -249,18 +189,42 @@ ORDER BY workout_date
 | 10                  | 2022-06-25T00:00:00.000Z |
 | 15                  | 2022-06-26T00:00:00.000Z |
 | 5                   | 2022-06-28T00:00:00.000Z |
+| 10                  | 2022-07-02T00:00:00.000Z |
+| 10                  | 2022-07-03T00:00:00.000Z |
+| 8                   | 2022-07-05T00:00:00.000Z |
+| 15                  | 2022-07-08T00:00:00.000Z |
+| 10                  | 2022-07-09T00:00:00.000Z |
+| 15                  | 2022-07-10T00:00:00.000Z |
+| 10                  | 2022-07-12T00:00:00.000Z |
+| 10                  | 2022-07-16T00:00:00.000Z |
+| 15                  | 2022-07-17T00:00:00.000Z |
+| 10                  | 2022-07-22T00:00:00.000Z |
+| 12                  | 2022-07-24T00:00:00.000Z |
+| 8                   | 2022-07-26T00:00:00.000Z |
+| 8                   | 2022-07-30T00:00:00.000Z |
+| 8                   | 2022-08-02T00:00:00.000Z |
+| 4                   | 2022-08-05T00:00:00.000Z |
+| 12                  | 2022-08-07T00:00:00.000Z |
+| 8                   | 2022-08-09T00:00:00.000Z |
+| 12                  | 2022-08-11T00:00:00.000Z |
+| 8                   | 2022-08-18T00:00:00.000Z |
+| 4                   | 2022-08-20T00:00:00.000Z |
+| 12                  | 2022-08-21T00:00:00.000Z |
+| 8                   | 2022-08-23T00:00:00.000Z |
+| 8                   | 2022-08-25T00:00:00.000Z |
+| 8                   | 2022-08-26T00:00:00.000Z |
+| 10                  | 2022-08-30T00:00:00.000Z |
 
 -- Avg Weight per Workoutdate
 SELECT 
 	AVG(lifts.weight_lbs) AS avg_weight,
-    	workout.workout_date
+  workout.workout_date
 FROM weightlifting.workout
 INNER JOIN weightlifting.lifts
 ON workout.workout_id = lifts.workout_id
 GROUP BY workout_date
 ORDER BY workout_date
 
-  -- Shortened
 | avg_weight         | workout_date             |
 | ------------------ | ------------------------ |
 | 51.111111111111114 | 2022-06-05T00:00:00.000Z |
@@ -276,19 +240,44 @@ ORDER BY workout_date
 | 79.5               | 2022-06-25T00:00:00.000Z |
 | 56.333333333333336 | 2022-06-26T00:00:00.000Z |
 | 100                | 2022-06-28T00:00:00.000Z |
+| 85.5               | 2022-07-02T00:00:00.000Z |
+| 55                 | 2022-07-03T00:00:00.000Z |
+| 92.5               | 2022-07-05T00:00:00.000Z |
+| 55.666666666666664 | 2022-07-08T00:00:00.000Z |
+| 88.5               | 2022-07-09T00:00:00.000Z |
+| 56.333333333333336 | 2022-07-10T00:00:00.000Z |
+| 90.5               | 2022-07-12T00:00:00.000Z |
+| 92.75              | 2022-07-16T00:00:00.000Z |
+| 56.833333333333336 | 2022-07-17T00:00:00.000Z |
+| 90.5               | 2022-07-22T00:00:00.000Z |
+| 50                 | 2022-07-24T00:00:00.000Z |
+| 83.75              | 2022-07-26T00:00:00.000Z |
+| 86.5625            | 2022-07-30T00:00:00.000Z |
+| 81.875             | 2022-08-02T00:00:00.000Z |
+| 63.75              | 2022-08-05T00:00:00.000Z |
+| 51.041666666666664 | 2022-08-07T00:00:00.000Z |
+| 82.5               | 2022-08-09T00:00:00.000Z |
+| 54.166666666666664 | 2022-08-11T00:00:00.000Z |
+| 85.625             | 2022-08-18T00:00:00.000Z |
+| 66.25              | 2022-08-20T00:00:00.000Z |
+| 54.541666666666664 | 2022-08-21T00:00:00.000Z |
+| 87.5               | 2022-08-23T00:00:00.000Z |
+| 59.375             | 2022-08-25T00:00:00.000Z |
+| 83.75              | 2022-08-26T00:00:00.000Z |
+| 80                 | 2022-08-30T00:00:00.000Z |
 
 -- Total Volume per Date
 SELECT 
-SUM(lifts.volume_lbs) AS total_volume,
+  SUM(lifts.volume_lbs) AS total_volume,
   workout.workout_date
 FROM
 	weightlifting.workout
  	INNER JOIN weightlifting.lifts
 	ON workout.workout_id = lifts.workout_id
 GROUP BY workout.workout_date
-ORDER BY workout.workout_date;
+ORDER BY workout.workout_date
+;
 
--- Shortened
 | total_volume | workout_date             |
 | ------------ | ------------------------ |
 | 2250         | 2022-06-05T00:00:00.000Z |
@@ -304,6 +293,31 @@ ORDER BY workout.workout_date;
 | 3315         | 2022-06-25T00:00:00.000Z |
 | 3345         | 2022-06-26T00:00:00.000Z |
 | 2195         | 2022-06-28T00:00:00.000Z |
+| 3320         | 2022-07-02T00:00:00.000Z |
+| 1950         | 2022-07-03T00:00:00.000Z |
+| 2695         | 2022-07-05T00:00:00.000Z |
+| 3485         | 2022-07-08T00:00:00.000Z |
+| 3675         | 2022-07-09T00:00:00.000Z |
+| 3555         | 2022-07-10T00:00:00.000Z |
+| 3225         | 2022-07-12T00:00:00.000Z |
+| 3125         | 2022-07-16T00:00:00.000Z |
+| 2912.5       | 2022-07-17T00:00:00.000Z |
+| 3995         | 2022-07-22T00:00:00.000Z |
+| 4320         | 2022-07-24T00:00:00.000Z |
+| 4920         | 2022-07-26T00:00:00.000Z |
+| 4155         | 2022-07-30T00:00:00.000Z |
+| 4100         | 2022-08-02T00:00:00.000Z |
+| 1650         | 2022-08-05T00:00:00.000Z |
+| 4555         | 2022-08-07T00:00:00.000Z |
+| 4220         | 2022-08-09T00:00:00.000Z |
+| 4070         | 2022-08-11T00:00:00.000Z |
+| 3970         | 2022-08-18T00:00:00.000Z |
+| 1840         | 2022-08-20T00:00:00.000Z |
+| 3959         | 2022-08-21T00:00:00.000Z |
+| 3640         | 2022-08-23T00:00:00.000Z |
+| 3080         | 2022-08-25T00:00:00.000Z |
+| 4120         | 2022-08-26T00:00:00.000Z |
+| 4475         | 2022-08-30T00:00:00.000Z |
 
 --Total volume per exercise 
 SELECT
@@ -334,14 +348,13 @@ GROUP BY exercises.exercise_name;
 -- Average Repetitions per Workout Date
 SELECT 
 	AVG(lifts.reps) AS repetitions,
-    workout.workout_date
+  workout.workout_date
 FROM weightlifting.workout
 INNER JOIN weightlifting.lifts
 ON workout.workout_id = lifts.workout_id
 GROUP BY workout_date
 ORDER BY workout_date
 
-  -- Shortened
 | repetitions        | workout_date             |
 | ------------------ | ------------------------ |
 | 4.8888888888888889 | 2022-06-05T00:00:00.000Z |
@@ -357,17 +370,42 @@ ORDER BY workout_date
 | 4.2000000000000000 | 2022-06-25T00:00:00.000Z |
 | 3.9333333333333333 | 2022-06-26T00:00:00.000Z |
 | 4.4000000000000000 | 2022-06-28T00:00:00.000Z |
+| 3.9000000000000000 | 2022-07-02T00:00:00.000Z |
+| 3.5000000000000000 | 2022-07-03T00:00:00.000Z |
+| 3.7500000000000000 | 2022-07-05T00:00:00.000Z |
+| 4.1333333333333333 | 2022-07-08T00:00:00.000Z |
+| 4.1000000000000000 | 2022-07-09T00:00:00.000Z |
+| 4.2000000000000000 | 2022-07-10T00:00:00.000Z |
+| 3.4000000000000000 | 2022-07-12T00:00:00.000Z |
+| 3.3000000000000000 | 2022-07-16T00:00:00.000Z |
+| 3.4000000000000000 | 2022-07-17T00:00:00.000Z |
+| 4.5000000000000000 | 2022-07-22T00:00:00.000Z |
+| 7.2500000000000000 | 2022-07-24T00:00:00.000Z |
+| 7.5000000000000000 | 2022-07-26T00:00:00.000Z |
+| 6.0000000000000000 | 2022-07-30T00:00:00.000Z |
+| 6.1250000000000000 | 2022-08-02T00:00:00.000Z |
+| 6.5000000000000000 | 2022-08-05T00:00:00.000Z |
+| 7.3333333333333333 | 2022-08-07T00:00:00.000Z |
+| 6.5000000000000000 | 2022-08-09T00:00:00.000Z |
+| 6.3333333333333333 | 2022-08-11T00:00:00.000Z |
+| 5.7500000000000000 | 2022-08-18T00:00:00.000Z |
+| 7.0000000000000000 | 2022-08-20T00:00:00.000Z |
+| 6.2500000000000000 | 2022-08-21T00:00:00.000Z |
+| 5.0000000000000000 | 2022-08-23T00:00:00.000Z |
+| 6.5000000000000000 | 2022-08-25T00:00:00.000Z |
+| 6.0000000000000000 | 2022-08-26T00:00:00.000Z |
+| 5.5000000000000000 | 2022-08-30T00:00:00.000Z |
 
 -- Total count for each category type 
 SELECT 
-    COUNT( CASE 
-        WHEN categories.category_id = '1' THEN 1
-        WHEN categories.category_id = '2' THEN 1
-        WHEN categories.category_id = '3' THEN 1
-        WHEN categories.category_id = '4' THEN 1
-        END
-        ) AS category_count,
-     categories.category_name
+  COUNT( CASE 
+    WHEN categories.category_id = '1' THEN 1
+    WHEN categories.category_id = '2' THEN 1
+    WHEN categories.category_id = '3' THEN 1
+    WHEN categories.category_id = '4' THEN 1
+    END
+  ) AS category_count,
+  categories.category_name
 FROM weightlifting.exercises
 LEFT JOIN weightlifting.categories
 ON exercises.category_id = categories.category_id

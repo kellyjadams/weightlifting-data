@@ -23,7 +23,7 @@ The second set of data is from June 1, 2022 to June 4, 2023. This project is in 
 * [FitNotes_Export 6-1-22 to 6-1-23 - 5 Lifts and Volume and 1RM (3).csv](https://github.com/kellyjadams/weightlifting-data/blob/828c257600184065298c9c5ec4e91b58ad63ffa5/FitNotes_Export%206-1-22%20to%206-1-23%20-%205%20Lifts%20and%20Volume%20and%201RM%20(3).csv) is the raw data exported from my fitness tracker app. It includes the date, exercise_id, category_id, weights (lbs), and reps. I added volume, 1 RM, and Workout_type. 
 
 ### V1 
-The first set of data was from the months June 5, 2022 - August 31, 2022. This version is complete and you can check out the finished files and project below. 
+The first set of data was from the months June 5, 2022 - August 31, 2022. This version is complete and you can check out the finished files and project below. **These are in the Version 1 folder.**
 
 #### 🔗 Links
 * [Tableau Dashboard](https://public.tableau.com/views/WeightliftingProject/Final?:language=en-US&:display_count=n&:origin=viz_share_link).
