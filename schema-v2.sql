@@ -6,13 +6,13 @@ SET search_path = weightlifting;
 
 -- Exercises Table 
 CREATE TABLE exercises (
-  "exercise_id" INTEGER,
+  "id" INTEGER,
   "exercise_name" VARCHAR(50),
   "category_id" INTEGER
 ); 
 
 INSERT INTO exercises 
-   ("exercise_id", "exercise_name", "category_id")
+   ("id", "exercise_name", "category_id")
 VALUES
    ('1', 'Deadlift', '4'),
    ('2', 'Bench Press', '1'),
@@ -22,12 +22,12 @@ VALUES
 
 -- Categories Table 
 CREATE TABLE categories (
-  "category_id" INTEGER,
+  "id" INTEGER,
   "category_name" VARCHAR(50)
 ); 
  
 INSERT INTO categories
-    ("category_id", "category_name")
+    ("id", "category_name")
 VALUES
    ('1', 'Push'),
    ('2', 'Pull'),
@@ -36,25 +36,25 @@ VALUES
 
 -- Workout Type Table 
 CREATE TABLE workout_type (
-  "workout_type_id" INTEGER,
+  "id" INTEGER,
   "workout_type_name" VARCHAR(50)
 ); 
 
 INSERT INTO workout_type
-    ("workout_type_id", "workout_type_name")
+    ("id", "workout_type_name")
 VALUES
    ('1', 'Strength'),
    ('2', 'Hypertrophy');
 
 -- Workout Table 
 CREATE TABLE workout (
-   "workout_id" INTEGER, 
+   "id" INTEGER, 
    "workout_date" DATE,
    "workout_type_id" INTEGER
  );
  
 INSERT INTO workout
-    ("workout_id", "workout_date", "workout_type_id")
+    ("id", "workout_date", "workout_type_id")
 VALUES
    ('1', '2022-06-05', '1'),
    ('2', '2022-06-07', '1'),
