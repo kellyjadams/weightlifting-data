@@ -1,3 +1,9 @@
+/*
+
+This is an updated version of my first query (v1).
+
+*/
+
 -- Workout Information
 SELECT *
 FROM weightlifting.workout
@@ -236,15 +242,7 @@ ORDER BY workout.workout_date
 
 --Total volume per exercise 
 SELECT
-SUM(
-      CASE
-        WHEN lifts.exercise_id = '1' THEN lifts.volume_lbs
-        WHEN lifts.exercise_id = '2' THEN lifts.volume_lbs
-        WHEN lifts.exercise_id = '3' THEN lifts.volume_lbs
-        WHEN lifts.exercise_id = '4' THEN lifts.volume_lbs
-        WHEN lifts.exercise_id = '5' THEN lifts.volume_lbs
-        END 
-  ) AS total_volume,
+SUM(lifts.volume_lbs)AS total_volume,
   exercises.exercise_name
 FROM 
 	weightlifting.lifts
@@ -284,13 +282,7 @@ ORDER BY workout_date
 
 -- Total count for each category type 
 SELECT 
-  COUNT( CASE 
-    WHEN categories.id = '1' THEN 1
-    WHEN categories.id = '2' THEN 1
-    WHEN categories.id = '3' THEN 1
-    WHEN categories.id = '4' THEN 1
-    END
-  ) AS category_count,
+  COUNT(exercises.id) AS category_count,
   categories.category_name
 FROM weightlifting.exercises
 LEFT JOIN weightlifting.categories
