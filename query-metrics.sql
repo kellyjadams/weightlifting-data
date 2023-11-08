@@ -2,7 +2,14 @@
 
 This is more advanced analysis of my weightlifting data. 
 
-Note: For the tables it (typically) only shows the first 5 dates but the query returns the entire lifts table. This is to save space in the query. 
+For each query:
+- Summary of what the query was analyzing
+- The actual query
+- The results (in markdown table format)
+
+Note: For some tables it only shows the first 5 rows but the query returns the entire lifts table. This is to save space in the query. This will be noted by either:
+- Full Table: The full table (results) are shown.
+- Partial Table: Only the first 5 rows are shown. 
 
 */
 
@@ -216,7 +223,7 @@ Note: For the tables it (typically) only shows the first 5 dates but the query r
 --Identify exercises where the weight lifted has increased the most over the entire year.
 
     --Get weight for each lift in the beginning
-    WITH InitialWeights AS (
+    WITH first_exercise_weight AS (
     SELECT 
         lifts.exercise_id,
         exercises.exercise_name AS exercise_name,
@@ -232,7 +239,7 @@ Note: For the tables it (typically) only shows the first 5 dates but the query r
     ),
 
     -- Get weight for each lift at the end 
-    FinalWeights AS (
+    final_exercise_weight AS (
     SELECT 
         lifts.exercise_id,
         LAST_VALUE(lifts.weight_lbs) OVER (PARTITION BY lifts.exercise_id ORDER BY workout.workout_date ROWS BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING) AS final_weight
@@ -246,12 +253,12 @@ Note: For the tables it (typically) only shows the first 5 dates but the query r
 
     -- Only get one exercise 
     SELECT DISTINCT
-    InitialWeights.exercise_name,
-    FinalWeights.final_weight - InitialWeights.initial_weight AS weight_increase
+    first_exercise_weight.exercise_name,
+    final_exercise_weight.final_weight - first_exercise_weight.initial_weight AS weight_increase
     FROM 
-    InitialWeights
-    JOIN FinalWeights
-    ON InitialWeights.exercise_id = FinalWeights.exercise_id
+    first_exercise_weight
+    JOIN final_exercise_weight
+    ON first_exercise_weight.exercise_id = final_exercise_weight.exercise_id
     ORDER BY weight_increase DESC
     ;  
 
@@ -265,10 +272,100 @@ Note: For the tables it (typically) only shows the first 5 dates but the query r
     | Overhead Press | -7              |
 
 --Identify exercises with the highest average volume.
+SELECT
+    exercises.exercise_name,
+    AVG(lifts.weight_lbs) as avg_weight
+FROM
+    weightlifting.lifts 
+    LEFT JOIN weightlifting.exercises ON exercises.id = lifts.exercise_id
+GROUP BY
+    exercises.exercise_name
+
+    --Full table
+    | exercise_name  | avg_weight         |
+    | -------------- | ------------------ |
+    | Row            | 61.833333333333336 |
+    | Deadlift       | 103.63481228668942 |
+    | Overhead Press | 45.16742081447964  |
+    | Squat          | 65.475             |
+    | Bench Press    | 58.39601769911504  |
+
 /* Workout Consistency */
 
 --Count how many workouts are done each month.
+SELECT  
+    TO_CHAR(DATE_TRUNC('month', workout.workout_date), 'YYYY-MM') AS month,
+    COUNT(workout.id) as num_workouts
+FROM
+    weightlifting.workout
+GROUP BY
+    month
+ORDER BY
+    month ASC
+
+    --Full Table
+    | month   | num_workouts |
+    | ------- | ------------ |
+    | 2022-06 | 13           |
+    | 2022-07 | 13           |
+    | 2022-08 | 12           |
+    | 2022-09 | 16           |
+    | 2022-10 | 8            |
+    | 2022-11 | 12           |
+    | 2022-12 | 16           |
+    | 2023-01 | 17           |
+    | 2023-02 | 12           |
+    | 2023-03 | 13           |
+    | 2023-04 | 16           |
+    | 2023-05 | 15           |
+    | 2023-06 | 2            |
+
 --Identify months or periods with the highest and lowest workout frequencies.
+
+--Counts how many workouts are in a month 
+WITH monthly_workouts AS (
+    SELECT  
+        TO_CHAR(DATE_TRUNC('month', workout.workout_date), 'YYYY-MM') AS month,
+        COUNT(workout.id) as num_workouts
+    FROM
+        weightlifting.workout
+    GROUP BY
+        month
+), 
+-- Ranks results of monthly_workouts
+ranked_months AS (
+    SELECT
+        month,
+        num_workouts,
+        -- Creates ranks from highest to lowest
+        RANK() OVER (ORDER BY num_workouts DESC) as rank_desc,
+        -- Creates ranks from lowest to highest
+        RANK() OVER (ORDER BY num_workouts ASC) as rank_asc
+    FROM
+        monthly_workouts
+)
+-- Main Query 
+SELECT 
+    month,
+    num_workouts,
+    CASE 
+        -- Only includes the top rank for highest and lowest exercises
+        WHEN rank_desc = 1 THEN 'Highest'
+        WHEN rank_asc = 1 THEN 'Lowest'
+        ELSE NULL 
+    END as frequency_rank
+FROM 
+    ranked_months
+WHERE 
+    rank_desc = 1 OR rank_asc = 1
+ORDER BY 
+    num_workouts DESC;
+
+-- Full table
+| month   | num_workouts | frequency_rank |
+| ------- | ------------ | -------------- |
+| 2023-01 | 17           | Highest        |
+| 2023-06 | 2            | Lowest         |
 
 /* Personal Records */
 
