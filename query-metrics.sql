@@ -20,8 +20,7 @@ Note: For some tables it only shows the first 5 rows but the query returns the e
         SUM(lifts.volume_lbs) AS total_volume_lifted
     FROM 
         weightlifting.lifts
-    INNER JOIN weightlifting.workout
-        ON lifts.workout_id = workout.id
+        INNER JOIN weightlifting.workout ON lifts.workout_id = workout.id
     GROUP BY 
         DATE_TRUNC('week', workout.workout_date)
     ORDER BY 
@@ -44,12 +43,9 @@ Note: For some tables it only shows the first 5 rows but the query returns the e
         SUM(lifts.volume_lbs) AS total_volume_lifted
     FROM 
         weightlifting.lifts
-    INNER JOIN weightlifting.workout 
-        ON lifts.workout_id = workout.id
-    INNER JOIN weightlifting.exercises 
-        ON lifts.exercise_id = exercises.id
-    INNER JOIN weightlifting.categories 
-        ON exercises.category_id = categories.id
+        INNER JOIN weightlifting.workout ON lifts.workout_id = workout.id
+        INNER JOIN weightlifting.exercises ON lifts.exercise_id = exercises.id
+        INNER JOIN weightlifting.categories  ON exercises.category_id = categories.id
     GROUP BY 
         categories.category_name, 
         DATE_TRUNC('month', workout.workout_date)
@@ -73,10 +69,8 @@ Note: For some tables it only shows the first 5 rows but the query returns the e
         COUNT(exercises.id) AS category_count,
         categories.category_name
     FROM weightlifting.exercises
-    LEFT JOIN weightlifting.categories
-        ON exercises.category_id = categories.id
-    LEFT JOIN weightlifting.lifts
-        ON exercises.id = lifts.exercise_id
+        LEFT JOIN weightlifting.categories ON exercises.category_id = categories.id 
+        LEFT JOIN weightlifting.lifts ON exercises.id = lifts.exercise_id
     GROUP BY 
         categories.category_name
     ORDER BY 
@@ -99,10 +93,8 @@ Note: For some tables it only shows the first 5 rows but the query returns the e
         AVG(lifts.volume_lbs) AS average_volume_lifted
     FROM 
         weightlifting.lifts
-    INNER JOIN weightlifting.exercises
-        ON lifts.exercise_id = exercises.id
-    INNER JOIN weightlifting.categories
-        ON exercises.category_id = categories.id
+        INNER JOIN weightlifting.exercises ON lifts.exercise_id = exercises.id
+        INNER JOIN weightlifting.categories ON exercises.category_id = categories.id
     GROUP BY 
         categories.category_name
     ORDER BY 
@@ -126,10 +118,8 @@ Note: For some tables it only shows the first 5 rows but the query returns the e
         COUNT(lifts.exercise_id) AS times_performed
     FROM 
         weightlifting.lifts
-    INNER JOIN weightlifting.workout
-        ON lifts.workout_id = workout.id
-    INNER JOIN weightlifting.exercises
-        ON lifts.exercise_id = exercises.id
+        INNER JOIN weightlifting.workout ON lifts.workout_id = workout.id
+        INNER JOIN weightlifting.exercises ON lifts.exercise_id = exercises.id
     WHERE 
         workout.workout_date BETWEEN '2022-06-05' AND '2023-06-03'
     GROUP BY 
@@ -153,8 +143,7 @@ Note: For some tables it only shows the first 5 rows but the query returns the e
         COUNT(lifts.exercise_id) AS times_performed
     FROM 
         weightlifting.exercises
-    LEFT JOIN weightlifting.lifts
-        ON exercises.id = lifts.exercise_id
+        LEFT JOIN weightlifting.lifts ON exercises.id = lifts.exercise_id
     GROUP BY 
         exercises.exercise_name
     --Filter out exercises that have been performed more than the average number of times exercises are done 
@@ -185,8 +174,7 @@ Note: For some tables it only shows the first 5 rows but the query returns the e
         COUNT(exercises.id) AS category_count,
         exercises.exercise_name 
     FROM weightlifting.exercises
-    LEFT JOIN weightlifting.lifts
-        ON exercises.id = lifts.exercise_id
+        LEFT JOIN weightlifting.lifts ON exercises.id = lifts.exercise_id
     GROUP BY 
         exercises.exercise_name
     ORDER BY 
@@ -207,10 +195,8 @@ Note: For some tables it only shows the first 5 rows but the query returns the e
         SUM(lifts.volume_lbs) AS total_volume_lifted
     FROM 
         weightlifting.lifts
-    INNER JOIN weightlifting.workout
-        ON lifts.workout_id = workout.id
-    INNER JOIN weightlifting.workout_type
-        ON workout.workout_type_id = workout_type.id
+        INNER JOIN weightlifting.workout ON lifts.workout_id = workout.id
+        INNER JOIN weightlifting.workout_type ON workout.workout_type_id = workout_type.id
     GROUP BY 
         workout_type.workout_type_name, 
         DATE_TRUNC('month', workout.workout_date)
@@ -253,10 +239,8 @@ Note: For some tables it only shows the first 5 rows but the query returns the e
         FIRST_VALUE(lifts.weight_lbs) OVER (PARTITION BY lifts.exercise_id ORDER BY workout.workout_date ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS initial_weight
     FROM 
         weightlifting.lifts
-    INNER JOIN weightlifting.workout
-        ON lifts.workout_id = workout.id
-    INNER JOIN weightlifting.exercises
-        ON lifts.exercise_id = exercises.id
+        INNER JOIN weightlifting.workout ON lifts.workout_id = workout.id
+        INNER JOIN weightlifting.exercises ON lifts.exercise_id = exercises.id
     WHERE 
         workout.workout_date BETWEEN '2022-06-05' AND '2023-06-03'
     ),
@@ -268,8 +252,7 @@ Note: For some tables it only shows the first 5 rows but the query returns the e
         LAST_VALUE(lifts.weight_lbs) OVER (PARTITION BY lifts.exercise_id ORDER BY workout.workout_date ROWS BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING) AS final_weight
     FROM 
         weightlifting.lifts
-    INNER JOIN weightlifting.workout
-        ON lifts.workout_id = workout.id
+        INNER JOIN weightlifting.workout ON lifts.workout_id = workout.id
     WHERE 
         workout.workout_date BETWEEN '2022-06-05' AND '2023-06-03'
     )
@@ -280,8 +263,7 @@ Note: For some tables it only shows the first 5 rows but the query returns the e
         final_exercise_weight.final_weight - first_exercise_weight.initial_weight AS weight_increase
     FROM 
         first_exercise_weight
-    JOIN final_exercise_weight
-        ON first_exercise_weight.exercise_id = final_exercise_weight.exercise_id
+        JOIN final_exercise_weight ON first_exercise_weight.exercise_id = final_exercise_weight.exercise_id
     ORDER BY 
         weight_increase DESC
     ;  
@@ -295,7 +277,7 @@ Note: For some tables it only shows the first 5 rows but the query returns the e
     | Bench Press    | -5              |
     | Overhead Press | -7              |
 
---Identify exercises with the highest average volume.
+--Identify exercises with the highest average weight.
     SELECT
         exercises.exercise_name,
         AVG(lifts.weight_lbs) as avg_weight
@@ -381,6 +363,7 @@ Note: For some tables it only shows the first 5 rows but the query returns the e
     FROM 
         ranked_months
     WHERE 
+        -- Shows both highest and lowest exercises 
         rank_desc = 1 OR rank_asc = 1
     ORDER BY 
         num_workouts DESC;
@@ -394,18 +377,192 @@ Note: For some tables it only shows the first 5 rows but the query returns the e
 /* Personal Records */
 
 --Track the highest weight lifted for each exercise.
+    SELECT
+        exercises.exercise_name,
+        MAX(lifts.weight_lbs) AS max_weight
+    FROM
+        weightlifting.exercises
+        JOIN weightlifting.lifts ON exercises.id = lifts.exercise_id
+    GROUP BY
+        exercises.exercise_name
+    ;
+
+    -- Full table
+    | exercise_name  | max_weight |
+    | -------------- | ---------- |
+    | Row            | 72.5       |
+    | Deadlift       | 125        |
+    | Overhead Press | 53         |
+    | Squat          | 75         |
+    | Bench Press    | 67.5       |
+
 --Identify when personal records are broken.
+
+    -- Rank each lift based on weight and date per exercise
+    WITH ranked_lifts AS (
+        SELECT
+            exercise_id,
+            weight_lbs,
+            workout_id,
+            TO_CHAR(workout_date, 'YYYY-MM-DD') AS workout_date,
+            -- Rank each lift
+            RANK() OVER (PARTITION BY exercise_id ORDER BY weight_lbs DESC, workout_date DESC) as weight_rank
+        FROM
+            weightlifting.lifts
+        JOIN
+            weightlifting.workout ON lifts.workout_id = workout.id
+    )
+    SELECT
+        exercises.exercise_name,
+        ranked_lifts.weight_lbs,
+        ranked_lifts.workout_date
+    FROM
+        ranked_lifts
+        JOIN weightlifting.exercises ON ranked_lifts.exercise_id = exercises.id
+    WHERE
+        ranked_lifts.weight_rank = 1
+    ;
+
+    -- Full table
+
+    | exercise_name  | weight_lbs | workout_date |
+    | -------------- | ---------- | ------------ |
+    | Deadlift       | 125        | 2022-09-30   |
+    | Bench Press    | 67.5       | 2023-04-25   |
+    | Squat          | 75         | 2023-04-26   |
+    | Squat          | 75         | 2023-04-26   |
+    | Squat          | 75         | 2023-04-26   |
+    | Overhead Press | 53         | 2022-09-29   |
+    | Overhead Press | 53         | 2022-09-29   |
+    | Overhead Press | 53         | 2022-09-29   |
+    | Overhead Press | 53         | 2022-09-29   |
+    | Overhead Press | 53         | 2022-09-29   |
+    | Row            | 72.5       | 2023-04-25   |
+
 
 /* Average Reps and Weights */
 
---Calculate the average reps and weight for each exercise over a certain period.
---Identify trends in lifting heavier weights or doing more reps over time.
+-- Calculate the average reps and weight for each exercise over a certain period.
+    SELECT
+        exercises.exercise_name,
+        AVG(lifts.weight_lbs) AS avg_weight,
+        AVG(lifts.reps) AS avg_reps
+    FROM
+        weightlifting.exercises 
+        JOIN weightlifting.lifts ON exercises.id = lifts.exercise_id
+        JOIN weightlifting.workout ON lifts.workout_id = workout.id
+    WHERE
+        workout.workout_date BETWEEN 'start_date' AND 'end_date'
+    GROUP BY
+        exercises.exercise_name
+    ;
+
+    -- For example this table is looking at dates between 2022-06-05 and 2022-12-31. This is a full table. 
+
+    | exercise_name  | avg_weight         | avg_reps           |
+    | -------------- | ------------------ | ------------------ |
+    | Row            | 60.92446043165467  | 5.0503597122302158 |
+    | Deadlift       | 104.76941747572816 | 5.1893203883495146 |
+    | Overhead Press | 47.06666666666667  | 4.8444444444444444 |
+    | Squat          | 67.18434343434343  | 4.7171717171717172 |
+    | Bench Press    | 58.97569444444444  | 5.0694444444444444 |
+
+--Calculate average weight and reps by month.
+
+    SELECT
+        exercises.exercise_name,
+        TO_CHAR(workout.workout_date, 'YYYY-MM') AS month,
+        AVG(lifts.weight_lbs) AS avg_weight,
+        AVG(lifts.reps) AS avg_reps
+    FROM
+        weightlifting.exercises
+        JOIN weightlifting.lifts ON exercises.id = lifts.exercise_id
+        JOIN weightlifting.workout ON lifts.workout_id = workout.id
+    GROUP BY
+        exercises.exercise_name, 
+        TO_CHAR(workout.workout_date, 'YYYY-MM')
+    ORDER BY
+        exercises.exercise_name, 
+        TO_CHAR(workout.workout_date, 'YYYY-MM')
+    ;
+
+    -- Partial table
+    | exercise_name  | month   | avg_weight         | avg_reps            |
+    | -------------- | ------- | ------------------ | ------------------- |
+    | Bench Press    | 2022-06 | 56.15384615384615  | 4.2692307692307692  |
+    | Bench Press    | 2022-07 | 59.583333333333336 | 4.6250000000000000  |
+    | Bench Press    | 2022-08 | 57.96875           | 6.8125000000000000  |
+    | Bench Press    | 2022-09 | 63.29545454545455  | 3.2727272727272727  |
+    | Bench Press    | 2022-10 | 58.18181818181818  | 4.1818181818181818  |
 
 /* Exercise Variation */
 
 --Calculate the number of different exercises performed in a given timeframe.
---Analyze the diversity of exercises in a workout routine.
+    SELECT
+        COUNT(DISTINCT lifts.exercise_id) AS number_of_exercises
+    FROM
+        weightlifting.workout
+        JOIN weightlifting.lifts ON workout.id = lifts.workout_id
+    WHERE
+        workout.workout_date BETWEEN 'start_date' AND 'end_date'
+    ;
+
+    -- For example this table is looking at dates between 2022-06-05 and 2022-12-31. This is a full table. 
+    | number_of_exercises |
+    | ------------------- |
+    | 5                   |
 
 /* Intensity Analysis */
 --Find out average weight lifted as a percentage of the highest weight for each exercise.
---Identify workouts or periods with the highest intensity.
+
+    WITH max_weights AS (
+        SELECT
+            exercise_id,
+            MAX(weight_lbs) AS max_weight
+        FROM
+            weightlifting.lifts
+        GROUP BY
+            exercise_id
+    )
+    SELECT
+        exercises.exercise_name,
+        AVG(lifts.weight_lbs) / max_weights.max_weight * 100 AS avg_weight_percentage
+    FROM
+        weightlifting.lifts
+        JOIN weightlifting.exercises ON lifts.exercise_id = exercises.id
+        JOIN max_weights ON lifts.exercise_id = max_weights.exercise_id
+    GROUP BY
+        exercises.exercise_name,max_weights.max_weight
+    ;
+
+    -- Full table
+    | exercise_name  | avg_weight_percentage |
+    | -------------- | --------------------- |
+    | Bench Press    | 86.51261881350376     |
+    | Row            | 85.28735632183908     |
+    | Overhead Press | 85.22154870656536     |
+    | Squat          | 87.29999999999998     |
+    | Deadlift       | 82.90784982935155     |
+
+--Identify workouts with the highest intensity.
+
+    SELECT
+        TO_CHAR(workout_date, 'YYYY-MM-DD') AS workout_date,
+        SUM(lifts.weight_lbs * lifts.reps) AS total_volume
+    FROM
+        weightlifting.workout
+    JOIN weightlifting.lifts ON workout.id = lifts.workout_id
+    GROUP BY
+        workout_date
+    ORDER BY
+        total_volume DESC
+    ;
+
+    -- Partial table
+    | workout_date | total_volume |
+    | ------------ | ------------ |
+    | 2022-12-08   | 5770         |
+    | 2022-10-12   | 5770         |
+    | 2022-12-06   | 5560         |
+    | 2022-12-24   | 5370         |
+    | 2022-12-03   | 5285         |
