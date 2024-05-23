@@ -20,6 +20,6 @@ The data was from the months June 5, 2022 - August 31, 2022. This version is com
 * [Explore my database using db-fiddle](https://www.db-fiddle.com/f/vSuQMqMWAtkJELP2gmPZNM/13).
 
 ## 📁 Files
-* [query.sql](https://github.com/kellyjadams/weightlifting-data/blob/main/Version%201/query.sql) is SQL code includes the queries I used to analyze my weightlifting data.
-* [schema.sql](https://github.com/kellyjadams/weightlifting-data/blob/main/Version%201/schema.sql) is SQL code used to create my own schema for my project
-* [FitNotes_Export_2022_08_31 (6) June-August 5 Lifts Data.csv](https://github.com/kellyjadams/weightlifting-data/blob/main/Version%201/FitNotes_Export_2022_08_31%20(6)%20June-August%205%20Lifts%20Data.csv) is the raw data exported from my fitness tracker app. It includes the date, exercise_id, category_id, weights (lbs), and reps.
+* [query.sql](/Version-1/query.sql) is SQL code includes the queries I used to analyze my weightlifting data.
+* [schema.sql](/Version-1/schema.sql) is SQL code used to create my own schema for my project
+* [FitNotes_Export_2022_08_31 (6) June-August 5 Lifts Data.csv](/Version-1/FitNotes_Export_2022_08_31_(6)_June-August_5_Lifts_Data.csv) is the raw data exported from my fitness tracker app. It includes the date, exercise_id, category_id, weights (lbs), and reps.
